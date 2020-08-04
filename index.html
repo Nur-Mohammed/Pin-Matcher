@@ -81,10 +81,14 @@
                 if (display1Num == display2Num) {
                     document.getElementById("matched").style.display = "block";
                     document.getElementById("unmatched").style.display = "none";
+                    document.getElementById("display2").value = null;
+                    document.getElementById("display1").value = null;
 
                 } else {
                     document.getElementById("unmatched").style.display = "block";
                     document.getElementById("matched").style.display = "none";
+                    document.getElementById("display2").value = null;
+                    document.getElementById("display1").value = null;
                 }
             }
 
