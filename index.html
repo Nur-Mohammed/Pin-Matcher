@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input class="form-control" type="text" id="display1" value="">
+                    <button class="generate-btn" onclick="random()">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input class="form-control" type="text" id="display2" style="text-align:left;">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                                <div class="button" onclick="catchingNum('btn7')" id="btn7">7</div>
+                                <div class="button" onclick="catchingNum('btn8')" id="btn8">8</div>
+                                <div class="button" onclick="catchingNum('btn9')" id="btn9">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" onclick="catchingNum('btn4')" id="btn4">4</div>
+                                <div class="button" onclick="catchingNum('btn5')" id="btn5">5</div>
+                                <div class="button" onclick="catchingNum('btn6')" id="btn6">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" onclick="catchingNum('btn1')" id="btn1">1</div>
+                                <div class="button" onclick="catchingNum('btn2')" id="btn2">2</div>
+                                <div class="button" onclick="catchingNum('btn3')" id="btn3">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" onclick="back()">
+                                    <</div> <div class="button" onclick="catchingNum('btn0')" id="btn0">0
+                                </div>
+                                <div class="button" id="clear">C</div>
+                            </div>
+                            <div>
+                                <button type="submit" class="submit-btn" onclick="match()">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="notify-section">
+                <p class="notify" id="unmatched">❌ Pin Didn't Match, Please try again</p>
+                <p class="notify" id="matched">✅ Pin Matched... Secret door is opening for you</p>
+            </div>
+        </div>
+        <script>
+            // Random Number generated function
+            function random() {
+                var anonymous = Math.round(Math.random() * 10000);
+                document.getElementById("display1").value = anonymous;
+            }
+
+            // Number Sending function in display
+            function catchingNum(id) {
+                var btn = document.getElementById(id).innerText;
+                var display = document.getElementById("display2");
+                display.value = display.value + btn;
+            }
+
+            // matching function
+            function match() {
+                var display1 = document.getElementById("display1").value;
+                var display1Num = parseInt(display1);
+                var display2 = document.getElementById("display2").value;
+                var display2Num = parseInt(display2);
+                if (display1Num == display2Num) {
+                    document.getElementById("matched").style.display = "block";
+                    document.getElementById("unmatched").style.display = "none";
+
+                } else {
+                    document.getElementById("unmatched").style.display = "block";
+                    document.getElementById("matched").style.display = "none";
+                }
+            }
+
+            // clear button
+            document.getElementById("clear").addEventListener("click", function () {
+                document.getElementById("display2").value = null;
+            })
+
+            // backspace button
+            function back() {
+                var value = document.getElementById("display2").value;
+                document.getElementById("display2").value = value.substr(0, value.length - 1);
+            }
+        </script>
+</body>
+
+</html>
